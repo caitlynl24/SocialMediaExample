@@ -42,9 +42,10 @@
         }
     ?>
 
-    <p style = "color:red;">
-        <?php echo $message; ?>
-    </p>
-
+    <?php if($message != ""): ?>
+        <p style = "color:red;">
+            <?php echo $message; ?>
+        </p>
+    <?php endif; ?>
     </body>
 </html>
