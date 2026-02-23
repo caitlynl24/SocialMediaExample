@@ -23,7 +23,7 @@
             $password = $_POST["password"];
 
             $sql = "SELECT * FROM users where 
-            username = '$username' and password = '$password'"
+            username = '$username' and password = '$password'";
 
             $result = $conn -> query($sql);
 
