@@ -22,16 +22,23 @@
             $username = $_POST["username"];
             $password = $_POST["password"];
 
-            $sql = "SELECT * FROM users where 
-            username = '$username' and password = '$password'";
+            $stmt = $conn -> prepare("SELECT password FROM users WHERE username = ?");
+            $stmt -> bind_param("s", $username);
+            $stmt -> execute();
+            $result = $stmt -> get_result();
 
-            $result = $conn -> query($sql);
+            if($result -> num_rows == 1) {
+                $row = $result -> fetch_assoc();
+                $hashedPassword = $row['password'];
 
-            if($result -> num_rows > 0) {
-                $message = "Login Successful";
-            }
-            else
+                if(password_verify($password, $hashedPassword)) {
+                    $message = "Login Successful";
+                } else {
+                    $message = "Login Unsuccessful";
+                }
+            } else{
                 $message = "Login Unsuccessful";
+            }
         }
     ?>
 
