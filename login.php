@@ -50,7 +50,7 @@
     function displayTable($result, $title) {
         if($result && $result -> num_rows > 0) {
             echo "<h3>$title</h3>";
-            echo "table border = '1' cellpadding = '5' cellspacing = '0'>";
+            echo "<table border = '1' cellpadding = '5' cellspacing = '0'>";
 
             //Table headers
             echo "<tr>";
