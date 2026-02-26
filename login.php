@@ -89,7 +89,7 @@
     $inner = $conn -> query ("
         select 
             users.username,
-            users.pssword,
+            users.password,
             users.created_at AS user_created,
             UserDetails.full_name,
             UserDetails.email,
@@ -105,7 +105,7 @@
     $left = $conn -> query ("
         select
             users.username,
-            users.pssword,
+            users.password,
             users.created_at AS user_created,
             UserDetails.full_name,
             UserDetails.email,
@@ -121,7 +121,7 @@
     $right = $conn -> query ("
         select
             users.username,
-            users.pssword,
+            users.password,
             users.created_at AS user_created,
             UserDetails.full_name,
             UserDetails.email,
@@ -137,7 +137,7 @@
     $full = $conn -> query ("
         select
             users.username,
-            users.pssword,
+            users.password,
             users.created_at AS user_created,
             UserDetails.full_name,
             UserDetails.email,
@@ -151,7 +151,7 @@
 
         select
             users.username,
-            users.pssword,
+            users.password,
             users.created_at AS user_created,
             UserDetails.full_name,
             UserDetails.email,
