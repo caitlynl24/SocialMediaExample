@@ -3,6 +3,93 @@
 	<head>
 		<title>Login</title>
 	</head>
+
+    <hr>
+    <h2>JOIN Query Results</h2>
+
+    <?php
+    function displayTable($result, $title) {
+        if($result && $result -> num_rows > 0) {
+            echo "<h3>$title</h3>";
+            echo "table border = '1' cellpadding = '5' cellspacing = '0'>";
+
+            //Table headers
+            echo "<tr>";
+            while($field = $result -> fetch_field()) {
+                echo "<th>{$field -> name}</th>";
+            }
+            echo "</tr>";
+
+            //Reset pointer
+            $result -> data_seek(0);
+
+            //Table rows
+            while($row = $result -> fetch_assoc()) {
+                echo "<tr>";
+                foreach ($row as $value) {
+                    echo "<td>$value</td>";
+                }
+                echo "</tr>";
+            }
+
+            echo "</table><br>";
+        } else {
+            echo "<h3>$title</h3><p>No results found.</p>";
+        }
+    }
+
+    //Natural Join
+    $natural = $conn -> query ("
+        select * 
+        from users
+        natural join UserDetails
+    ");
+    displayTable($natural, "Natural Join");
+
+    //Inner Join
+    $inner = $conn -> query ("
+        select * 
+        from users
+        inner join UserDetails
+        on users.username = UserDetails.username
+    ");
+    displayTable($inner, "Inner Join");
+
+    //Left Outer Join
+    $left = $conn -> query ("
+        select * 
+        from users
+        left outer join UserDetails
+        on users.username = UserDetails.username
+    ");
+    displayTable($left, "Left Outer Join");
+
+    //Right Outer Join
+    $right = $conn -> query ("
+        select * 
+        from users
+        right outer join UserDetails
+        on users.username = UserDetails.username
+    ");
+    displayTable($right, "Right Outer Join");
+
+    //Full Outer Join (Simulated with Union)
+    $full = $conn -> query ("
+        select * 
+        from users
+        left join UserDetails
+        on users.username = UserDetails.username
+
+        union
+
+        select * 
+        from users
+        right join UserDetails
+        on users.username = UserDetails.username
+    ");
+    displayTable($full, "Full Outer Join (Simulated)");
+    ?>
+
 	<body>
 		
 	<h2>Login Page</h2>
