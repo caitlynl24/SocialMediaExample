@@ -87,7 +87,14 @@
 
     //Inner Join
     $inner = $conn -> query ("
-        select * 
+        select 
+            users.username,
+            users.pssword,
+            users.created_at AS user_created,
+            UserDetails.full_name,
+            UserDetails.email,
+            UserDetails.city,
+            UserDetails.created_at AS details_created 
         from users
         inner join UserDetails
         on users.username = UserDetails.username
@@ -96,7 +103,14 @@
 
     //Left Outer Join
     $left = $conn -> query ("
-        select * 
+        select
+            users.username,
+            users.pssword,
+            users.created_at AS user_created,
+            UserDetails.full_name,
+            UserDetails.email,
+            UserDetails.city,
+            UserDetails.created_at AS details_created  
         from users
         left outer join UserDetails
         on users.username = UserDetails.username
@@ -105,7 +119,14 @@
 
     //Right Outer Join
     $right = $conn -> query ("
-        select * 
+        select
+            users.username,
+            users.pssword,
+            users.created_at AS user_created,
+            UserDetails.full_name,
+            UserDetails.email,
+            UserDetails.city,
+            UserDetails.created_at AS details_created  
         from users
         right outer join UserDetails
         on users.username = UserDetails.username
@@ -114,14 +135,28 @@
 
     //Full Outer Join (Simulated with Union)
     $full = $conn -> query ("
-        select * 
+        select
+            users.username,
+            users.pssword,
+            users.created_at AS user_created,
+            UserDetails.full_name,
+            UserDetails.email,
+            UserDetails.city,
+            UserDetails.created_at AS details_created  
         from users
         left join UserDetails
         on users.username = UserDetails.username
 
         union
 
-        select * 
+        select
+            users.username,
+            users.pssword,
+            users.created_at AS user_created,
+            UserDetails.full_name,
+            UserDetails.email,
+            UserDetails.city,
+            UserDetails.created_at AS details_created  
         from users
         right join UserDetails
         on users.username = UserDetails.username
